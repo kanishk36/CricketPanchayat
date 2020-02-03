@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <!--    <color name="colorAccent">#D81B60</color>-->
+    <color name="colorAccent">#ffffff</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="tab_background_color">#660107</color>
+    <color name="app_background_color">#b8000d</color>
+    <color name="home_button_background">#FFC63032</color>
+    <color name="white_32alpha">#52FFFFFF</color>
+    <color name="app_background_color_32alpha">#52b8000d</color>
+
+    <color name="black_overlay">#66000000</color>
+
+</resources>
