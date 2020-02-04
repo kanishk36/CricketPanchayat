@@ -14,7 +14,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cricketpanchayat.common.base.AbstractActivity
+import com.cricketpanchayat.models.Menu
 import com.cricketpanchayat.ui.adapter.CategoryAdapter
+import com.cricketpanchayat.ui.adapter.MenuAdapter
 import com.cricketpanchayat.viewmodels.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -24,7 +26,7 @@ class MainActivity : AbstractActivity<HomeViewModel>(), View.OnClickListener {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
-    private var categoryAdapter: CategoryAdapter? = null
+//    private var categoryAdapter: CategoryAdapter? = null
 
     override val viewModel: HomeViewModel
         get() = ViewModelProviders.of(this).get(HomeViewModel::class.java)
@@ -45,18 +47,24 @@ class MainActivity : AbstractActivity<HomeViewModel>(), View.OnClickListener {
 
         setSupportActionBar(toolbar)
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_history, R.id.navigation_add, R.id.navigation_settings, R.id.navigation_more
+            R.id.navigation_home, R.id.navigation_history, R.id.navigation_more
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
 
-        categoryAdapter = CategoryAdapter()
+//        categoryAdapter = CategoryAdapter()
 
-        val categoryListView = findViewById<RecyclerView>(R.id.categoryListView)
-        categoryListView.adapter = categoryAdapter
+        val menuAdapter = getMenuAdapter()
 
-        CategoryAdapter.categoryData.observe(this, Observer<String> {
+        val menuListView = findViewById<RecyclerView>(R.id.menuListView)
+        menuListView.adapter = menuAdapter
+
+//        CategoryAdapter.categoryData.observe(this, Observer<String> {
+//            drawerLayout.closeDrawer(GravityCompat.START)
+//        })
+
+        menuAdapter.selectedMenu.observe(this, Observer {
             drawerLayout.closeDrawer(GravityCompat.START)
         })
 
@@ -70,6 +78,19 @@ class MainActivity : AbstractActivity<HomeViewModel>(), View.OnClickListener {
         when(view?.id) {
             R.id.btnMenu -> drawerLayout.openDrawer(GravityCompat.START)
         }
+    }
+
+    private fun getMenuAdapter(): MenuAdapter {
+
+        val menuList = ArrayList<Menu>()
+        menuList.add(Menu(getString(R.string.title_add), Menu.MENUTYPE.ADD))
+        menuList.add(Menu(getString(R.string.title_language), Menu.MENUTYPE.LANGUAGE))
+        menuList.add(Menu(getString(R.string.title_settings), Menu.MENUTYPE.SETTINGS))
+
+        val menuAdapter = MenuAdapter()
+        menuAdapter.setMenuList(menuList)
+
+        return menuAdapter
     }
 
 }

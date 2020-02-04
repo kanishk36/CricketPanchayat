@@ -11,15 +11,15 @@
         android:icon="@drawable/ic_tab_history"
         android:title="@string/title_history" />
 
-    <item
-        android:id="@+id/navigation_add"
-        android:icon="@drawable/ic_tab_add"
-        android:title="@string/title_add" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_add"-->
+<!--        android:icon="@drawable/ic_tab_add"-->
+<!--        android:title="@string/title_add" />-->
 
-    <item
-        android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_tab_settings"
-        android:title="@string/title_settings" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_settings"-->
+<!--        android:icon="@drawable/ic_tab_settings"-->
+<!--        android:title="@string/title_settings" />-->
 
     <item
         android:id="@+id/navigation_more"

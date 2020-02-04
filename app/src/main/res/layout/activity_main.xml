@@ -104,7 +104,7 @@
             <include layout="@layout/nav_header_navigation"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoryListView"
+                android:id="@+id/menuListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

@@ -11,7 +11,7 @@
         android:minHeight="?actionBarSize"
         app:tabMode="scrollable"
         app:tabBackground="@android:color/transparent"
-        app:tabTextColor="@color/white_32alpha"
+        app:tabTextColor="@color/white_70alpha"
         app:tabIndicatorColor="@color/white"
         app:tabSelectedTextColor="@color/white"
         app:tabRippleColor="@color/app_background_color_32alpha"
