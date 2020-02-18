@@ -11,6 +11,7 @@ import com.cricketpanchayat.utils.AppConstants
 class HomeViewModel : BaseViewModel() {
 
     val feedsData: MutableLiveData<ArrayList<Feed>> = MutableLiveData()
+    var slugTag: String = ""
 
     fun fetchLatestFeeds(showProgress: Boolean) {
         HomeTabApiStore.fetchLatestFeeds(this, this, showProgress)
@@ -21,6 +22,7 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun fetchCategoryFeeds(slug: String) {
+        slugTag = slug
         HomeTabApiStore.fetchCategoryFeeds(slug, this, this)
     }
 
@@ -40,6 +42,7 @@ class HomeViewModel : BaseViewModel() {
 
         } else if(apiResponse is CategoryDataResponse) {
             feedsData.value = apiResponse.category_array
+            AppCache.INSTANCE.addToAppCache(slugTag, apiResponse.category_array)
 
         } else if(apiResponse is SearchResponse) {
             feedsData.value = apiResponse.category_array

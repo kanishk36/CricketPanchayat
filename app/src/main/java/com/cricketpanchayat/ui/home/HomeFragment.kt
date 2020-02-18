@@ -81,7 +81,38 @@ class HomeFragment : AbstractFragment<HomeViewModel>(), View.OnClickListener, Se
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewModel.fetchCategoryFeeds(tab!!.tag.toString())
+
+                val tabTag = tab!!.tag.toString()
+
+                if(getString(R.string.lblLatestArticle).equals(tabTag)) {
+                    loadLatestArticles()
+
+                } else if(getString(R.string.lblMostViewed).equals(tabTag)) {
+
+                    if(AppCache.INSTANCE.containsKey(AppConstants.MOST_VIEWED_TAG)) {
+                        val mostViewed = AppCache.INSTANCE.getValueOfAppCache(AppConstants.MOST_VIEWED_TAG) as ArrayList<Feed>
+                        setFeedsList(mostViewed)
+
+                    } else {
+                        setFeedsList(ArrayList())
+                        viewModel.fetchMostViewedFeeds(true)
+                    }
+
+                } else if(getString(R.string.lblAudioArticle).equals(tabTag)) {
+                    setFeedsList(ArrayList())
+
+                } else {
+                    if(AppCache.INSTANCE.containsKey(tabTag)) {
+                        val feeds = AppCache.INSTANCE.getValueOfAppCache(tabTag) as ArrayList<Feed>
+                        setFeedsList(feeds)
+
+                    } else {
+                        setFeedsList(ArrayList())
+                        viewModel.fetchCategoryFeeds(tabTag)
+                    }
+
+                }
+
 //                resetButtonSelection()
             }
 
@@ -92,12 +123,9 @@ class HomeFragment : AbstractFragment<HomeViewModel>(), View.OnClickListener, Se
 
         registerObservers()
 
-//        if(AppCache.INSTANCE.containsKey(AppConstants.LATEST_FEED_TAG)) {
-//            val latestFeeds: ArrayList<Feed> = AppCache.INSTANCE.getValueOfAppCache(AppConstants.LATEST_FEED_TAG) as ArrayList<Feed>
-//            setFeedsList(latestFeeds)
-//        }
+        loadLatestArticles()
 
-//        viewModel.fetchLatestFeeds(true)
+        viewModel.fetchLatestFeeds(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -228,7 +256,26 @@ class HomeFragment : AbstractFragment<HomeViewModel>(), View.OnClickListener, Se
     }
 
     private fun addTabs() {
+        val latestArticle = getString(R.string.lblLatestArticle)
+        val latestTab = tabLayout.newTab()
+        latestTab.text = latestArticle
+        latestTab.tag = latestArticle
+        tabLayout.addTab(latestTab)
+
+        val mostViewed = getString(R.string.lblMostViewed)
+        val mostViewedTab = tabLayout.newTab()
+        mostViewedTab.text = mostViewed
+        mostViewedTab.tag = mostViewed
+        tabLayout.addTab(mostViewedTab)
+
+        val audioArticle = getString(R.string.lblAudioArticle)
+        val audioArticleTab = tabLayout.newTab()
+        audioArticleTab.text = audioArticle
+        audioArticleTab.tag = audioArticle
+        tabLayout.addTab(audioArticleTab)
+
         if(AppCache.INSTANCE.containsKey(AppConstants.CATEGORY_LIST_TAG)) {
+
             val categoryList = AppCache.INSTANCE.getValueOfAppCache(AppConstants.CATEGORY_LIST_TAG) as ArrayList<Category>
 
             for (category in categoryList) {
@@ -239,8 +286,17 @@ class HomeFragment : AbstractFragment<HomeViewModel>(), View.OnClickListener, Se
                 tabLayout.addTab(tab)
             }
 
-            viewModel.fetchCategoryFeeds(categoryList[0].slug)
         }
 
+    }
+
+    private fun loadLatestArticles() {
+        if(AppCache.INSTANCE.containsKey(AppConstants.LATEST_FEED_TAG)) {
+            val latestFeeds: ArrayList<Feed> = AppCache.INSTANCE.getValueOfAppCache(AppConstants.LATEST_FEED_TAG) as ArrayList<Feed>
+            setFeedsList(latestFeeds)
+
+        } else {
+            viewModel.fetchLatestFeeds(true)
+        }
     }
 }
