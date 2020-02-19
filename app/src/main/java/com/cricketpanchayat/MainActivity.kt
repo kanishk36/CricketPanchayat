@@ -47,7 +47,7 @@ class MainActivity : AbstractActivity<HomeViewModel>(), View.OnClickListener {
 
         setSupportActionBar(toolbar)
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_history, R.id.navigation_more
+            R.id.navigation_home, R.id.navigation_history, R.id.navigation_add, R.id.navigation_settings, R.id.navigation_more
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -83,7 +83,7 @@ class MainActivity : AbstractActivity<HomeViewModel>(), View.OnClickListener {
     private fun getMenuAdapter(): MenuAdapter {
 
         val menuList = ArrayList<Menu>()
-        menuList.add(Menu(getString(R.string.title_add), Menu.MENUTYPE.ADD))
+//        menuList.add(Menu(getString(R.string.title_add), Menu.MENUTYPE.ADD))
         menuList.add(Menu(getString(R.string.title_language), Menu.MENUTYPE.LANGUAGE))
         menuList.add(Menu(getString(R.string.title_settings), Menu.MENUTYPE.SETTINGS))
 
