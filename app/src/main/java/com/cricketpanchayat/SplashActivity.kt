@@ -22,8 +22,6 @@ class SplashActivity : AbstractActivity<SplashViewModel>() {
 
         setContentView(R.layout.activity_splash)
 
-        viewModel.fetchCategoryList()
-
         viewModel.categoryListData.observe(this, Observer<ArrayList<Category>> {
 
             AppCache.INSTANCE.addToAppCache(AppConstants.CATEGORY_LIST_TAG, it)
@@ -35,6 +33,11 @@ class SplashActivity : AbstractActivity<SplashViewModel>() {
             launchMainActivity()
         })
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchCategoryList()
     }
 
     private fun launchMainActivity() {
