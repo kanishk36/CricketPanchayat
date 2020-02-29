@@ -1,5 +1,6 @@
 package com.cricketpanchayat.common.stores
 
+import com.cricketpanchayat.common.listeners.APIResponseListener
 import com.cricketpanchayat.common.listeners.ProgressIndicator
 import com.cricketpanchayat.models.categorymenu.CategoryResponse
 import com.cricketpanchayat.models.home.CategoryDataResponse
@@ -9,7 +10,6 @@ import com.cricketpanchayat.models.home.SearchResponse
 import com.cricketpanchayat.network.ServiceInvoker
 import com.cricketpanchayat.network.SystemErrorHandler
 import com.cricketpanchayat.utils.AppConstants
-import com.fab.corporatebanking.common.listener.APIResponseListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

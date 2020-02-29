@@ -1,8 +1,8 @@
 package com.cricketpanchayat.common.stores
 
+import com.cricketpanchayat.common.listeners.APIResponseListener
 import com.cricketpanchayat.network.APIResponse
 import com.cricketpanchayat.network.SystemErrorHandler
-import com.fab.corporatebanking.common.listener.APIResponseListener
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

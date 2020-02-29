@@ -1,4 +1,4 @@
-package com.fab.corporatebanking.common.listener
+package com.cricketpanchayat.common.listeners
 
 import com.cricketpanchayat.network.APIResponse
 import com.cricketpanchayat.network.ErrorInfo

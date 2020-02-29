@@ -2,10 +2,11 @@ package com.cricketpanchayat.common.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cricketpanchayat.common.listeners.APIResponseListener
 import com.cricketpanchayat.common.listeners.ProgressIndicator
 import com.cricketpanchayat.network.APIResponse
 import com.cricketpanchayat.network.ErrorInfo
-import com.fab.corporatebanking.common.listener.APIResponseListener
+
 
 abstract class BaseViewModel: ViewModel(), APIResponseListener, ProgressIndicator {
 
